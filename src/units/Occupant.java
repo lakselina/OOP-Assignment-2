@@ -11,8 +11,10 @@ public abstract class Occupant {
         this.position = position;
     }
 
-    public abstract void accept(OccupantVisitor visitor);
+    public Point getPosition() {
+        return position;
+    }
 
-    public Point getPosition() { return position; }
+    public abstract void accept(OccupantVisitor visitor);
 
 }
