@@ -1,19 +1,22 @@
 package units;
 
+import board.Floor;
+import board.Wall;
 import utils.Position;
+import visitor.CellVisitor;
 import visitor.OccupantVisitor;
 
-public abstract class Unit extends Occupant {
+public abstract class Unit extends Occupant implements CellVisitor {
 
     protected String name;
-    protected Integer healthPool;
-    protected Integer healthAmount;
-    protected Integer attackPoints;
-    protected Integer defensePoints;
+    protected int healthPool;
+    protected int healthAmount;
+    protected int attackPoints;
+    protected int defensePoints;
 
-    public Unit(Position point, String name, Integer healthPool, Integer healthAmount, Integer attackPoints, Integer defensePoints)
+    public Unit(Position position, String name, int healthPool, int healthAmount, int attackPoints, int defensePoints)
     {
-        super(point);
+        super(position);
         this.name = name;
         this.healthPool = healthPool;
         this.healthAmount = healthAmount;
@@ -27,23 +30,31 @@ public abstract class Unit extends Occupant {
         return name;
     }
 
-    public Integer getHealthPool() {
+    public int getHealthPool() {
         return healthPool;
     }
 
-    public Integer getHealthAmount() {
+    public int getHealthAmount() {
         return healthAmount;
     }
 
-    public void setHealthAmount(Integer healthAmount){
+    public void setHealthAmount(int healthAmount){
         this.healthAmount = healthAmount;
     }
 
-    public Integer getAttackPoints() {
+    public int getAttackPoints() {
         return attackPoints;
     }
 
-    public Integer getDefensePoints() {
+    public int getDefensePoints() {
         return defensePoints;
+    }
+
+    public void visit(Wall wall){
+
+    }
+    // not s full implementation
+    public void visit(Floor floor){
+        this.position = floor.getPosition();
     }
 }
