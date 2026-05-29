@@ -4,6 +4,7 @@ import board.Cell;
 import units.Occupant;
 import units.Unit;
 import units.enemy.Enemy;
+import units.player.Player;
 import utils.Position;
 
 import java.util.ArrayList;
@@ -15,11 +16,17 @@ public class GameBoard {
     private List<Unit> units;
     private int width;
     private int height;
+    private List<Enemy> enemies;
+    private Position exitPosition;
+    private Player player;
 
     public GameBoard(Cell[][] grid) {
         this.grid = grid;
         this.height = grid.length;
         this.width = grid[0].length;
+
+        this.units = new ArrayList<>();
+        this.enemies = new ArrayList<>();
     }
 
     public Cell getCell(Position p) {
@@ -30,18 +37,26 @@ public class GameBoard {
     }
 
     public Occupant getOccupant(Position p) {
-        Cell cell = getCell(p);
-        if (cell != null && cell.isFloor()) {
-            return cell.getOccupant();
-        }
-        return null;
+        return getCell(p).getOccupant();
     }
 
     public void setOccupant(Position p, Occupant o) {
-        Cell cell = getCell(p);
-        if (cell != null && cell.isFloor()) {
-            cell.setOccupant(o);
+        getCell(p).setOccupant(o);
+    }
+
+    public void addUnit(Unit unit) {
+        this.units.add(unit);
+        if (unit instanceof Enemy) {
+            this.enemies.add((Enemy) unit);
         }
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public void setExitPosition(Position pos) {
+        this.exitPosition = pos;
     }
 
     private boolean isOutOfBounds(Position p) {
@@ -94,6 +109,20 @@ public class GameBoard {
         }
 
         return enemies;
+    }
+
+    public boolean isLevelComplete() {
+        if (this.player.getPosition().equals(this.exitPosition)) {
+            return true;
+        }
+
+        for (Enemy enemy : this.enemies) {
+            if (enemy.isAlive()) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
 

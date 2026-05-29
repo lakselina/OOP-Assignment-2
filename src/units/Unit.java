@@ -58,7 +58,7 @@ public abstract class Unit extends Occupant implements CellVisitor {
     public void visit(Wall wall){
 
     }
-    // not s full implementation
+
     public void visit(Floor floor){
         this.position = floor.getPosition();
     }
