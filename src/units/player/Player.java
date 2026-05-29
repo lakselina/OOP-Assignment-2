@@ -11,7 +11,7 @@ public abstract class Player extends Unit {
 
    public Player(Position point, String name, int healthPool, int healthAmount, int attackPoints, int defensePoints)
    {
-       super(point, name,healthPool,healthAmount,attackPoints,defensePoints);
+       super(point, name, healthPool, healthAmount, attackPoints, defensePoints);
 
        this.experience = 0;
        this.playerLevel = 1;
@@ -30,6 +30,8 @@ public abstract class Player extends Unit {
     }
 
     protected abstract void levelUpSpecifics();
+
+    public abstract void castAbility(OccupantVisitor visitor);
 
     public Integer getLevel() {
         return playerLevel;

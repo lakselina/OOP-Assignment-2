@@ -9,8 +9,8 @@ public class Rogue extends Player{
     protected int currEnergy;
     private final int ENERGY_POOL = 100;
 
-    public Rogue(Position point, int healthPool, int healthAmount, int attackPoints, int defensePoints, int cost){
-        super(point, "Mage", healthPool, healthAmount, attackPoints, defensePoints);
+    public Rogue(Position point, String name, int healthPool, int healthAmount, int attackPoints, int defensePoints, int cost){
+        super(point, name, healthPool, healthAmount, attackPoints, defensePoints);
 
         this.cost = cost;
         this.currEnergy = ENERGY_POOL;

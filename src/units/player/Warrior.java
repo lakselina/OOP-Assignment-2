@@ -1,5 +1,6 @@
 package units.player;
 
+import utils.Position;
 import visitor.OccupantVisitor;
 
 public class Warrior extends Player {
@@ -7,7 +8,7 @@ public class Warrior extends Player {
     private int remainingCooldown;
     private int abilityCooldown;
 
-    public Warrior(Point point, int healthPool, int healthAmount, int attackPoints, int defensePoints, int abilityCooldown) {
+    public Warrior(Position point, int healthPool, int healthAmount, int attackPoints, int defensePoints, int abilityCooldown) {
         super(point, "Warrior", healthPool, healthAmount, attackPoints, defensePoints);
 
         this.abilityCooldown = abilityCooldown;

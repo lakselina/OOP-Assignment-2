@@ -27,6 +27,10 @@ public abstract class Unit extends Occupant {
         return name;
     }
 
+    public boolean isAlive() {
+        return this.healthAmount > 0;
+    }
+
     public Integer getHealthPool() {
         return healthPool;
     }

@@ -1,10 +1,8 @@
 package visitor;
 
 import units.enemy.Enemy;
-import units.player.Mage;
-import units.player.Player;
-import units.player.Rogue;
-import units.player.Warrior;
+import units.player.*;
+import utils.Position;
 
 public interface OccupantVisitor {
 
@@ -14,4 +12,5 @@ public interface OccupantVisitor {
     void visit(Warrior w);
     void visit(Mage m);
     void visit(Rogue r);
+    void visit(Hunter h);
 }
