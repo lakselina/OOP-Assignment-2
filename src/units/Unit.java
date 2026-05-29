@@ -30,6 +30,11 @@ public abstract class Unit extends Occupant implements CellVisitor {
         return name;
     }
 
+    public boolean isAlive() {
+        return this.healthAmount > 0;
+    }
+
+
     public int getHealthPool() {
         return healthPool;
     }
