@@ -5,7 +5,8 @@ import board.Wall;
 
 public interface CellVisitor {
 
-    void visit(Wall w);
-    void visit(Floor f);
+    void visit(Wall wall);
+
+    void visit(Floor floor);
 
 }
