@@ -1,6 +1,7 @@
 package game;
 
 import board.Cell;
+import utils.Position;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
