@@ -3,7 +3,6 @@ import units.Unit;
 import units.player.Player;
 import utils.Position;
 import visitor.OccupantVisitor;
-import utils.Point;
 
 
 public abstract class Enemy extends Unit {
