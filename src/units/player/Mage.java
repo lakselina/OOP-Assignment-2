@@ -13,8 +13,8 @@ public class Mage extends Player {
     protected int hitsCount;
     protected int abilityRange;
 
-    public Mage(Position point, int healthPool, int healthAmount, int attackPoints, int defensePoints, int manaPool, int manaCost, int spellPower, int hitsCount, int abilityRange){
-        super(point, "Mage", healthPool, healthAmount, attackPoints, defensePoints);
+    public Mage(Position point, String name, int healthPool, int healthAmount, int attackPoints, int defensePoints, int manaPool, int manaCost, int spellPower, int hitsCount, int abilityRange){
+        super(point, name, healthPool, healthAmount, attackPoints, defensePoints);
 
         this.manaPool = manaPool;
         this.currMana = manaPool/4;

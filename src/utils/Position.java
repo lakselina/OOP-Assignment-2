@@ -36,6 +36,10 @@ public class Position {
         this.y = this.y + deltaY;
     }
 
+    public Position add(int dx, int dy) {
+        return new Position(this.x + dx, this.y + dy);
+    }
+
     @Override
     public String toString(){
         return "(" + this.getX() + "," + this.getY() + ")";

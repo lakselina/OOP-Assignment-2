@@ -1,11 +1,9 @@
 package visitor;
 
 import game.GameBoard;
+import units.player.*;
+import utils.Position;
 import units.enemy.Enemy;
-import units.player.Mage;
-import units.player.Player;
-import units.player.Rogue;
-import units.player.Warrior;
 
 import java.util.List;
 import java.util.Random;
@@ -51,6 +49,16 @@ public class AbilityVisitor implements OccupantVisitor {
         List<Enemy> targets = board.getEnemiesInRange(r.getPosition(), 1);
         for(Enemy e : targets) {
             e.takeDamage(r.getAttackPoints());
+        }
+    }
+
+    @Override
+    public void visit(Hunter h) {
+        List<Enemy> enemies = board.getEnemiesInRange(h.getPosition(), h.getAbilityRange());
+
+        Enemy target = findClosestEnemy(h.getPosition(), enemies);
+        if (target != null) {
+            target.takeDamage(h.getAttackPoints());
         }
     }
 }
