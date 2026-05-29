@@ -4,6 +4,7 @@ import game.GameBoard;
 import units.enemy.Enemy;
 import units.player.Mage;
 import units.player.Player;
+import units.player.Rogue;
 import units.player.Warrior;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public class AbilityVisitor implements OccupantVisitor {
     public void visit(Enemy e) {}
 
     @Override
-    public void performAbility(Warrior w) {
+    public void visit(Warrior w) {
         int heal = 10 * w.getDefensePoints();
         w.setHealthAmount(Math.min(w.getHealthPool(), w.getHealthAmount() + heal));
 
@@ -42,6 +43,14 @@ public class AbilityVisitor implements OccupantVisitor {
 
         for (Enemy enemy : enemiesInRange) {
             enemy.takeDamage(m.getSpellPower());
+        }
+    }
+
+    @Override
+    public void visit(Rogue r) {
+        List<Enemy> targets = board.getEnemiesInRange(r.getPosition(), 1);
+        for(Enemy e : targets) {
+            e.takeDamage(r.getAttackPoints());
         }
     }
 }

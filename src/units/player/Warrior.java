@@ -1,14 +1,13 @@
 package units.player;
 
-import utils.Point;
 import visitor.OccupantVisitor;
 
 public class Warrior extends Player {
 
-    private Integer remainingCooldown;
-    private Integer abilityCooldown;
+    private int remainingCooldown;
+    private int abilityCooldown;
 
-    public Warrior(Point point, Integer healthPool, Integer healthAmount, Integer attackPoints, Integer defensePoints, Integer abilityCooldown) {
+    public Warrior(Point point, int healthPool, int healthAmount, int attackPoints, int defensePoints, int abilityCooldown) {
         super(point, "Warrior", healthPool, healthAmount, attackPoints, defensePoints);
 
         this.abilityCooldown = abilityCooldown;

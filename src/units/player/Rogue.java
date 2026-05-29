@@ -1,18 +1,45 @@
 package units.player;
 
-import utils.Point;
+import utils.Position;
+import visitor.OccupantVisitor;
 
 public class Rogue extends Player{
 
-    protected Integer cost;
-    protected Integer currEnergy;
+    protected int cost;
+    protected int currEnergy;
+    private final int ENERGY_POOL = 100;
 
-    public Rogue(Point point, Integer healthPool, Integer healthAmount, Integer attackPoints, Integer defensePoints, Integer cost){
+    public Rogue(Position point, int healthPool, int healthAmount, int attackPoints, int defensePoints, int cost){
         super(point, "Mage", healthPool, healthAmount, attackPoints, defensePoints);
 
         this.cost = cost;
-        this.currEnergy = 100;
+        this.currEnergy = ENERGY_POOL;
     }
 
+    public void castAbility(OccupantVisitor visitor) {
+        if (this.currEnergy >= this.cost) {
+            this.currEnergy -= this.cost;
+            this.accept(visitor);
+        }
+    }
 
+    @Override
+    public void onTick() {
+        this.currEnergy = Math.min(ENERGY_POOL, currEnergy + 10);
+    }
+
+    @Override
+    protected void levelUpSpecifics() {
+        this.currEnergy = ENERGY_POOL;
+        this.attackPoints += 3 * getLevel();
+    }
+
+    @Override
+    public void accept(OccupantVisitor visitor) {
+        visitor.visit(this);
+    }
+
+    public int getCurrentEnergy() {
+        return currEnergy;
+    }
 }
