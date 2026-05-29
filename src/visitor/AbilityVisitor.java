@@ -37,10 +37,13 @@ public class AbilityVisitor implements OccupantVisitor {
 
     @Override
     public void visit(Mage m) {
-        List<Enemy> enemiesInRange = board.getEnemiesInRange(m.getPosition(), m.getAbilityRange());
+        List<Enemy> enemiesInRange = board.getEnemiesInRange(m.getPosition(), m.getRange());
 
-        for (Enemy enemy : enemiesInRange) {
-            enemy.takeDamage(m.getSpellPower());
+        for (int i = 0; i < m.getHitsCount(); i++) {
+            if (!enemiesInRange.isEmpty()) {
+                Enemy target = enemiesInRange.get((int) (Math.random() * enemiesInRange.size()));
+                m.castAbility(target);
+            }
         }
     }
 
@@ -54,11 +57,9 @@ public class AbilityVisitor implements OccupantVisitor {
 
     @Override
     public void visit(Hunter h) {
-        List<Enemy> enemies = board.getEnemiesInRange(h.getPosition(), h.getAbilityRange());
-
-        Enemy target = findClosestEnemy(h.getPosition(), enemies);
-        if (target != null) {
-            target.takeDamage(h.getAttackPoints());
+        Enemy closest = board.findClosestEnemy(h.getPosition(), board.getEnemies());
+        if (closest != null) {
+            h.attack(closest); // או הלוגיקה שלך להתקפה
         }
     }
 }

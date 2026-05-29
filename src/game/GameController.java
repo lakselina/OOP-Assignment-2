@@ -1,5 +1,7 @@
 package game;
 
+import board.Cell;
+import ui.MessageCallback;
 import units.player.Player;
 import units.enemy.Enemy;
 import utils.Position;
@@ -14,46 +16,63 @@ public class GameController {
     private Scanner scanner;
     private List<String> levelFiles;
     private int currentLevelIndex;
+    private MessageCallback messageCallback;
 
-    public GameController(GameBoard board, Player player) {
+    public GameController(GameBoard board, Player player, MessageCallback callback) {
         this.board = board;
         this.player = player;
         this.scanner = new Scanner(System.in);
+        this.messageCallback = callback;
     }
 
+
     public void play() {
-        boolean gameRunning = true;
+        while (currentLevelIndex < levelFiles.size()) {
 
-        while (gameRunning) {
-            System.out.println(board.toString());
+            loadLevel(levelFiles.get(currentLevelIndex));
 
-            String input = scanner.nextLine();
-            handlePlayerTurn(input);
+            while (player.isAlive() && !board.isLevelComplete()) {
+
+                System.out.println(board.toString());
+                String input = scanner.nextLine();
+
+                handlePlayerTurn(input);
+
+                if (!player.isAlive()){
+                    break;
+                }
+
+                if (board.isLevelComplete()){
+                    break;
+                }
+
+                handleEnemiesTurn();
+
+                if (!player.isAlive()){
+                    break;
+                }
+
+                player.onTick();
+                for (Enemy e : board.getEnemies()) {
+                    e.onTick();
+                }
+            }
 
             if (!player.isAlive()) {
-                System.out.println("Game Over!");
-                gameRunning = false;
-                break;
+                messageCallback.send("Game Over!");
+                return;
             }
 
-            handleEnemiesTurn();
-
-            if (!player.isAlive()) {
-                System.out.println("Game Over!");
-                gameRunning = false;
-                break;
-            }
-
-            player.onTick();
-            for (Enemy e : board.getEnemies()) {
-                e.onTick();
-            }
+            messageCallback.send("Level " + (currentLevelIndex + 1) + " Complete!");
+            currentLevelIndex++;
         }
 
-        if (player.isAlive()) {
-            System.out.println("Level Complete!");
-            // כאן תכניסי לוגיקה לטעינת השלב הבא (LevelParser)
-        }
+        messageCallback.send("Congratulations! You won the game!");
+    }
+
+    private void loadLevel(String levelPath) {
+        this.board = LevelParser.load(levelPath);
+        this.player.setPosition(board.getPlayerStartingPosition());
     }
 
     private void handlePlayerTurn(String input) {
@@ -76,13 +95,15 @@ public class GameController {
                 player.castAbility(visitor);
                 break;
             default:
-                System.out.println("Invalid move!");
+                messageCallback.send("Invalid move!");
         }
     }
 
     private void movePlayer(int dx, int dy) {
         Position newPos = player.getPosition().add(dx, dy);
-    }
+        Cell targetCell = board.getCell(newPos);
+
+        targetCell.accept(player);    }
 
     private void handleEnemiesTurn() {
         for (Enemy enemy : board.getEnemies()) {
