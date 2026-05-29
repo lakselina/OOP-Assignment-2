@@ -6,7 +6,7 @@ import utils.Point;
 
 
 public abstract class Enemy extends Unit {
-    protected Integer experienceValue;
+    protected int experienceValue;
 
 
     public Enemy(Point point, String name, Integer healthPool, Integer healthAmount, Integer attackPoints, Integer defensePoints, Integer experienceValue) {
@@ -14,7 +14,7 @@ public abstract class Enemy extends Unit {
         this.experienceValue = experienceValue;
     }
 
-    public Integer getExperienceValue(){
+    public int getExperienceValue(){
         return this.experienceValue;
     }
 
