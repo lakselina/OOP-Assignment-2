@@ -14,11 +14,12 @@ public class Point {
         this(0,0);
     }
 
-    public double getX(){
+    public double getX()
+    {
         return this.x;
     }
 
-    public double getY(){
+    public double getY() {
         return this.y;
     }
 
