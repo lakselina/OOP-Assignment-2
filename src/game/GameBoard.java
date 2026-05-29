@@ -1,7 +1,6 @@
 package game;
 
 import units.enemy.Enemy;
-import utils.Point;
 
 import java.util.ArrayList;
 import java.util.List;

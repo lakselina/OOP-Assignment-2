@@ -1,17 +1,17 @@
 package units;
 
-import utils.Point;
+import utils.Position;
 import visitor.OccupantVisitor;
 
 public abstract class Occupant {
 
-    protected Point position;
+    protected Position position;
 
-    public Occupant(Point position) {
+    public Occupant(Position position) {
         this.position = position;
     }
 
-    public Point getPosition() {
+    public Position getPosition() {
         return position;
     }
 
