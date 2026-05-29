@@ -1,19 +1,19 @@
 package units.player;
 
-import utils.Point;
+import utils.Position;
 import visitor.OccupantVisitor;
 
 
 public class Mage extends Player {
 
-    protected Integer manaPool;
-    protected Integer currMana;
-    protected Integer manaCost;
-    protected Integer spellPower;
-    protected Integer hitsCount;
-    protected Integer abilityRange;
+    protected int manaPool;
+    protected int currMana;
+    protected int manaCost;
+    protected int spellPower;
+    protected int hitsCount;
+    protected int abilityRange;
 
-    public Mage(Point point, Integer healthPool, Integer healthAmount, Integer attackPoints, Integer defensePoints, Integer manaPool, Integer manaCost, Integer spellPower, Integer hitsCount, Integer abilityRange){
+    public Mage(Position point, int healthPool, int healthAmount, int attackPoints, int defensePoints, int manaPool, int manaCost, int spellPower, int hitsCount, int abilityRange){
         super(point, "Mage", healthPool, healthAmount, attackPoints, defensePoints);
 
         this.manaPool = manaPool;
@@ -45,15 +45,15 @@ public class Mage extends Player {
         visitor.visit((Player)this);
     }
 
-    public Integer getSpellPower() {
+    public int getSpellPower() {
         return spellPower;
     }
 
-    public Integer getCurrentMana() {
+    public int getCurrentMana() {
         return currMana;
     }
 
-    public Integer getAbilityRange(){
+    public int getAbilityRange(){
         return abilityRange;
     }
 }

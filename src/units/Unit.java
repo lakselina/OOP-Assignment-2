@@ -1,6 +1,6 @@
 package units;
 
-import utils.Point;
+import utils.Position;
 import visitor.OccupantVisitor;
 
 public abstract class Unit extends Occupant {
@@ -11,7 +11,7 @@ public abstract class Unit extends Occupant {
     protected Integer attackPoints;
     protected Integer defensePoints;
 
-    public Unit(Point point, String name, Integer healthPool, Integer healthAmount, Integer attackPoints, Integer defensePoints)
+    public Unit(Position point, String name, Integer healthPool, Integer healthAmount, Integer attackPoints, Integer defensePoints)
     {
         super(point);
         this.name = name;

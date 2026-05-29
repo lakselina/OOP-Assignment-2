@@ -1,15 +1,15 @@
 package units.player;
 
+import utils.Position;
 import units.Unit;
-import utils.Point;
 import visitor.OccupantVisitor;
 
 public abstract class Player extends Unit {
 
-   private Integer experience;
-   private Integer playerLevel;
+   private int experience;
+   private int playerLevel;
 
-   public Player(Point point, String name, Integer healthPool, Integer healthAmount, Integer attackPoints, Integer defensePoints)
+   public Player(Position point, String name, int healthPool, int healthAmount, int attackPoints, int defensePoints)
    {
        super(point, name,healthPool,healthAmount,attackPoints,defensePoints);
 
@@ -35,7 +35,7 @@ public abstract class Player extends Unit {
         return playerLevel;
     }
 
-    public Integer getExperience() {
+    public int getExperience() {
         return experience;
     }
 
