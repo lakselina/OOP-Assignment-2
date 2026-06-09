@@ -31,13 +31,13 @@ public class AbilityVisitor implements OccupantVisitor {
         if (!enemiesInRange.isEmpty()) {
             Enemy target = enemiesInRange.get(new Random().nextInt(enemiesInRange.size()));
             int damage = (int) (w.getHealthPool() * 0.1);
-            target.takeDamage(damage);
+            target.defend(damage);
         }
     }
 
     @Override
     public void visit(Mage m) {
-        List<Enemy> enemiesInRange = board.getEnemiesInRange(m.getPosition(), m.getRange());
+        List<Enemy> enemiesInRange = board.getEnemiesInRange(m.getPosition(), m.getAbilityRange());
 
         for (int i = 0; i < m.getHitsCount(); i++) {
             if (!enemiesInRange.isEmpty()) {
@@ -51,7 +51,7 @@ public class AbilityVisitor implements OccupantVisitor {
     public void visit(Rogue r) {
         List<Enemy> targets = board.getEnemiesInRange(r.getPosition(), 1);
         for(Enemy e : targets) {
-            e.takeDamage(r.getAttackPoints());
+            e.defend(r.getAttackPoints());
         }
     }
 
@@ -60,7 +60,7 @@ public class AbilityVisitor implements OccupantVisitor {
         List<Enemy> enemiesInRange = board.getEnemiesInRange(h.getPosition(), h.getAbilityRange());
         Enemy closest = board.findClosestEnemy(h.getPosition(), enemiesInRange);
         if (closest != null) {
-            closest.takeDamage(h.getAttackPoints());
+            closest.defend(h.getAttackPoints());
         }
     }
 }

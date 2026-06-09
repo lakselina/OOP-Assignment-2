@@ -96,22 +96,6 @@ public abstract class Unit extends Occupant implements CellVisitor, OccupantVisi
     public void visit(Rogue r){}
     public void visit(Hunter h){}
 
-    public void takeDamage(int incomingDamage) {
-        Random rnd = new Random();
-
-        int defenseRoll = rnd.nextInt(this.defensePoints + 1);
-
-        int actualDamage = incomingDamage - defenseRoll;
-
-        if (actualDamage > 0) {
-            this.healthAmount = this.healthAmount - actualDamage;
-
-            if (this.healthAmount < 0) {
-                this.healthAmount = 0;
-            }
-        }
-    }
-
     public String description() {
         return String.format("%s\t\tHealth: %s/%s\t\tAttack: %d\t\tDefense: %d",
                 getName(), getHealthAmount(), getHealthPool(), getAttackPoints(), getDefensePoints());

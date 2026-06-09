@@ -32,7 +32,7 @@ public class Trap extends Enemy {
         if (this.position.distance(player.getPosition()) < 2){
             Random rnd = new Random();
             int attackRoll = rnd.nextInt(this.attackPoints + 1);
-            player.takeDamage(attackRoll);
+            player.defend(attackRoll);
         }
     }
 

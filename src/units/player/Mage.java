@@ -52,4 +52,6 @@ public class Mage extends Player {
     public int getAbilityRange(){
         return abilityRange;
     }
+
+    public int getHitsCount(){ return  hitsCount; }
 }
