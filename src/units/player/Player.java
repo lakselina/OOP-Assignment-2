@@ -1,5 +1,6 @@
 package units.player;
 
+import units.enemy.Enemy;
 import utils.Position;
 import units.Unit;
 import visitor.OccupantVisitor;
@@ -33,7 +34,7 @@ public abstract class Player extends Unit {
 
     public abstract void castAbility(OccupantVisitor visitor);
 
-    public Integer getLevel() {
+    public int getLevel() {
         return playerLevel;
     }
 
@@ -42,6 +43,16 @@ public abstract class Player extends Unit {
     }
 
     public abstract void onTick();
+
+    public void visit(Player p) {
+    }
+
+    public void visit(Enemy e) {
+        this.engageCombat(e);
+
+        if (!e.isAlive()) {
+        }
+    }
 
     @Override
     public void accept(OccupantVisitor visitor) {

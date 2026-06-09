@@ -6,7 +6,7 @@ import utils.Position;
 import visitor.CellVisitor;
 import visitor.OccupantVisitor;
 
-public abstract class Unit extends Occupant implements CellVisitor {
+public abstract class Unit extends Occupant implements CellVisitor, OccupantVisitor {
 
     protected String name;
     protected int healthPool;
@@ -59,6 +59,34 @@ public abstract class Unit extends Occupant implements CellVisitor {
     }
 
     public void visit(Floor floor){
-        this.position = floor.getPosition();
+        Occupant occupant = floor.getOccupant();
+
+        if (occupant == null) {
+            this.position = floor.getPosition();
+
+        } else {
+            occupant.accept(this);
+        }
+    }
+
+    protected int roll(int max) {
+        return (int) (Math.random() * (max + 1));
+    }
+
+    public int defend(int attackDamage) {
+        int defenseRoll = roll(this.defensePoints);
+        int damageTaken = Math.max(0, attackDamage - defenseRoll);
+        this.healthAmount -= damageTaken;
+        return damageTaken;
+    }
+
+    public void engageCombat(Unit defender) {
+        int attackRoll = this.roll(this.attackPoints);
+        int damageDealt = defender.defend(attackRoll);
+    }
+
+    public String description() {
+        return String.format("%s\t\tHealth: %s/%s\t\tAttack: %d\t\tDefense: %d",
+                getName(), getHealthAmount(), getHealthPool(), getAttackPoints(), getDefensePoints());
     }
 }
