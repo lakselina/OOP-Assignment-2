@@ -24,5 +24,13 @@ public abstract class Enemy extends Unit {
     }
 
     public abstract void onEnemyTurn(Player player, GameBoard board);
+
+    @Override
+    public void visit(Player p){
+        this.engageCombat(p);
+    }
+
+    @Override
+    public void visit(Enemy e){}
 }
 

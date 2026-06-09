@@ -27,11 +27,5 @@ public abstract class Cell {
 
     public abstract void accept(CellVisitor visitor);
 
-    public Occupant getOccupant(){
-        return null;
-    }
 
-    public void setOccupant(Occupant occupant){
-
-    }
 }
