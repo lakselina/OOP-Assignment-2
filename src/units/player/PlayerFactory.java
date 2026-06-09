@@ -21,6 +21,7 @@ public class PlayerFactory {
             case "Ygritte":
                 return new Hunter(startPos, "Ygritte", 200, 200, 30, 2, 6);
             default:
-                throw new IllegalArgumentException("Unknown character choice: " + choice);        }
+                throw new IllegalArgumentException("Unknown character choice: " + choice);
+        }
     }
 }
