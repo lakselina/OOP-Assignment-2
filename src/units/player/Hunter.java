@@ -27,7 +27,7 @@ public class Hunter extends Player {
     @Override
     public void onTick() {
         this.ticksCount++;
-        if (this.ticksCount == 1) {
+        if (this.ticksCount == 10) {
             this.arrowsCount += getLevel();
             this.ticksCount = 0;
         }
@@ -38,11 +38,6 @@ public class Hunter extends Player {
         this.arrowsCount += 10 * getLevel();
         this.attackPoints += 2 * getLevel();
         this.defensePoints += getLevel();
-    }
-
-    @Override
-    public void accept(OccupantVisitor visitor) {
-        visitor.visit(this);
     }
 
     public int getArrowsCount() {

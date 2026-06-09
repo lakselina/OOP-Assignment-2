@@ -34,11 +34,6 @@ public class Rogue extends Player{
         this.attackPoints += 3 * getLevel();
     }
 
-    @Override
-    public void accept(OccupantVisitor visitor) {
-        visitor.visit(this);
-    }
-
     public int getCurrentEnergy() {
         return currEnergy;
     }

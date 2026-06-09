@@ -41,10 +41,6 @@ public class Mage extends Player {
         this.currMana = Math.min(manaPool, currMana + (this.getLevel()));
     }
 
-    public void accept(OccupantVisitor visitor) {
-        visitor.visit((Player)this);
-    }
-
     public int getSpellPower() {
         return spellPower;
     }

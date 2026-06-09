@@ -39,11 +39,6 @@ public class Warrior extends Player {
     }
 
     @Override
-    public void accept(OccupantVisitor visitor) {
-            visitor.visit((Player)this);
-    }
-
-    @Override
     public String toString() {
         return super.toString() + String.format(" | Level: %d | Exp: %d | Cooldown: %d",
                 getLevel(), getExperience(), remainingCooldown);
