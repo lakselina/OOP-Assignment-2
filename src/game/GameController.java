@@ -35,7 +35,7 @@ public class GameController {
 
             while (player.isAlive() && !board.isLevelComplete()) {
 
-                System.out.println(board.toString());
+                messageCallback.send(board.toString());
                 String input = scanner.nextLine();
 
                 handlePlayerTurn(input);
