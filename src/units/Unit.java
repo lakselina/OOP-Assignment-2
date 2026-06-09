@@ -19,11 +19,13 @@ public abstract class Unit extends Occupant implements CellVisitor, OccupantVisi
     protected int healthAmount;
     protected int attackPoints;
     protected int defensePoints;
+    protected char tile;
 
-    public Unit(Position position, String name, int healthPool, int healthAmount, int attackPoints, int defensePoints)
+    public Unit(Position position, String name, char tile, int healthPool, int healthAmount, int attackPoints, int defensePoints)
     {
         super(position);
         this.name = name;
+        this.tile = tile;
         this.healthPool = healthPool;
         this.healthAmount = healthAmount;
         this.attackPoints = attackPoints;
@@ -99,5 +101,10 @@ public abstract class Unit extends Occupant implements CellVisitor, OccupantVisi
     public String description() {
         return String.format("%s\t\tHealth: %s/%s\t\tAttack: %d\t\tDefense: %d",
                 getName(), getHealthAmount(), getHealthPool(), getAttackPoints(), getDefensePoints());
+    }
+
+    @Override
+    public String toString(){
+        return String.valueOf(this.tile);
     }
 }
