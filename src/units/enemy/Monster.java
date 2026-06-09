@@ -14,50 +14,59 @@ public class Monster extends Enemy{
     }
 
     @Override
-    public void onEnemyTurn(Player player, GameBoard board){
+    public void onEnemyTurn(Player player, GameBoard board) {
         int dx = 0;
-        int dy =0;
+        int dy = 0;
 
         int distance = this.position.distance(player.getPosition());
-        if (distance < visionRange){
+        if (distance < visionRange) {
             int diffX = this.position.getX() - player.getPosition().getX();
             int diffY = this.position.getY() - player.getPosition().getY();
-            if (Math.abs(diffX) > Math.abs(diffY)){
-                if (diffX > 0){
+            if (Math.abs(diffX) > Math.abs(diffY)) {
+                if (diffX > 0) {
                     dx = -1;
-                }
-                else {
+                } else {
                     dx = 1;
                 }
-            }
-            else {
-                if (diffY > 0){
+            } else {
+                if (diffY > 0) {
                     dy = -1;
-                }
-                else {
+                } else {
                     dy = 1;
                 }
             }
         } else {
             Random rnd = new Random();
             int randomMove = rnd.nextInt(5);
-            switch (randomMove){
-                case 0: dx = -1; break;
-                case 1: dx = 1; break;
-                case 2: dy = -1; break;
-                case 3: dy = 1; break;
-                case 4: break;
+            switch (randomMove) {
+                case 0:
+                    dx = -1;
+                    break;
+                case 1:
+                    dx = 1;
+                    break;
+                case 2:
+                    dy = -1;
+                    break;
+                case 3:
+                    dy = 1;
+                    break;
+                case 4:
+                    break;
             }
         }
+        Position oldPos = this.position;
         Position newPos = this.position.add(dx, dy);
         Cell targetCell = board.getCell(newPos);
         targetCell.accept(this);
-    }
 
+        if (!oldPos.equals(this.position)) {
+            board.setOccupant(oldPos, null);
+            board.setOccupant(this.position, this);
+        }
+    }
     public int getVisionRange(){
         return visionRange;
     }
-
-
 
 }

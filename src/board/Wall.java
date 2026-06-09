@@ -12,4 +12,9 @@ public class Wall extends Cell{
     public void accept(CellVisitor visitor){
         visitor.visit(this);
     }
+
+    @Override
+    public String toString(){
+        return "#";
+    }
 }

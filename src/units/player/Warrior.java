@@ -39,8 +39,8 @@ public class Warrior extends Player {
     }
 
     @Override
-    public String toString() {
-        return super.toString() + String.format(" | Level: %d | Exp: %d | Cooldown: %d",
+    public String description() {
+        return super.description() + String.format(" | Level: %d | Exp: %d | Cooldown: %d",
                 getLevel(), getExperience(), remainingCooldown);
     }
 }

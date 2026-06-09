@@ -39,6 +39,7 @@ public class GameController {
                 String input = scanner.nextLine();
 
                 handlePlayerTurn(input);
+                board.removeDeadEnemies();
 
                 if (!player.isAlive()){
                     break;
@@ -49,6 +50,7 @@ public class GameController {
                 }
 
                 handleEnemiesTurn();
+                board.removeDeadEnemies();
 
                 if (!player.isAlive()){
                     break;
@@ -104,10 +106,17 @@ public class GameController {
     }
 
     private void movePlayer(int dx, int dy) {
-        Position newPos = player.getPosition().add(dx, dy);
+        Position oldPos = player.getPosition();
+        Position newPos = oldPos.add(dx, dy);
         Cell targetCell = board.getCell(newPos);
 
-        targetCell.accept(player);    }
+        targetCell.accept(player);
+
+        if (!oldPos.equals(player.getPosition())) {
+            board.setOccupant(oldPos, null);
+            board.setOccupant(player.getPosition(), player);
+        }
+    }
 
     private void handleEnemiesTurn() {
         for (Enemy enemy : board.getEnemies()) {

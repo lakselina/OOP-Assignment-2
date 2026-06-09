@@ -24,4 +24,12 @@ public class Floor extends Cell {
     public void setOccupant(Occupant occupant){
         this.occupant = occupant;
     }
+
+    @Override
+    public String toString(){
+        if (this.occupant != null){
+            return this.occupant.toString();
+        }
+        return ".";
+    }
 }

@@ -127,5 +127,35 @@ public class GameBoard {
 
         return true;
     }
+
+    @Override
+    public String toString(){
+        StringBuilder boardString = new StringBuilder();
+        for (int y = 0; y < height; y++){
+            for (int x = 0; x < width; x++){
+                boardString.append(grid[y][x].toString());
+            }
+            boardString.append("\n");
+        }
+        if (this.player != null){
+            boardString.append(this.player.description());
+        }
+        return boardString.toString();
+    }
+
+    public void removeDeadEnemies() {
+        List<Enemy> deadEnemies = new ArrayList<>();
+
+        for (Enemy e : this.enemies) {
+            if (!e.isAlive()) {
+                deadEnemies.add(e);
+                this.setOccupant(e.getPosition(), null);
+            }
+        }
+
+        this.enemies.removeAll(deadEnemies);
+        this.units.removeAll(deadEnemies);
+    }
+
 }
 
