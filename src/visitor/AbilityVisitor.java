@@ -57,9 +57,10 @@ public class AbilityVisitor implements OccupantVisitor {
 
     @Override
     public void visit(Hunter h) {
-        Enemy closest = board.findClosestEnemy(h.getPosition(), board.getEnemies());
+        List<Enemy> enemiesInRange = board.getEnemiesInRange(h.getPosition(), h.getAbilityRange());
+        Enemy closest = board.findClosestEnemy(h.getPosition(), enemiesInRange);
         if (closest != null) {
-            h.attack(closest); // או הלוגיקה שלך להתקפה
+            closest.takeDamage(h.getAttackPoints());
         }
     }
 }
