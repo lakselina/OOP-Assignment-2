@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 import units.player.Warrior;
 import utils.Position;
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TrapTests {
@@ -23,7 +21,6 @@ public class TrapTests {
 
         dummyPlayer = new Warrior(new Position(1, 1), "Target", 100, 100, 10, 5, 5);
 
-        List<Enemy> enemies = List.of(trap);
         Cell[][] dummyGrid = new Cell[5][5];
 
         dummyBoard = new GameBoard(dummyGrid);
