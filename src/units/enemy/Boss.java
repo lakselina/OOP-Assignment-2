@@ -34,4 +34,8 @@ public class Boss extends Monster implements HeroicUnit{
             this.combatTicks = 0;
         }
     }
+
+    public int getCombatTicks() {
+        return combatTicks;
+    }
 }
