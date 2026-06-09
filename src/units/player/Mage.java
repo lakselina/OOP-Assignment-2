@@ -54,4 +54,8 @@ public class Mage extends Player {
     }
 
     public int getHitsCount(){ return  hitsCount; }
+
+    public int getManaPool() {
+        return manaPool;
+    }
 }
