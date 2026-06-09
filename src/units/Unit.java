@@ -2,11 +2,17 @@ package units;
 
 import board.Floor;
 import board.Wall;
+import units.player.Hunter;
+import units.player.Mage;
+import units.player.Rogue;
+import units.player.Warrior;
 import utils.Position;
 import visitor.CellVisitor;
 import visitor.OccupantVisitor;
 
-public abstract class Unit extends Occupant implements CellVisitor {
+import java.util.Random;
+
+public abstract class Unit extends Occupant implements CellVisitor, OccupantVisitor {
 
     protected String name;
     protected int healthPool;
@@ -59,6 +65,55 @@ public abstract class Unit extends Occupant implements CellVisitor {
     }
 
     public void visit(Floor floor){
-        this.position = floor.getPosition();
+        Occupant occupant = floor.getOccupant();
+
+        if (occupant == null) {
+            this.position = floor.getPosition();
+
+        } else {
+            occupant.accept(this);
+        }
+    }
+
+    protected int roll(int max) {
+        return (int) (Math.random() * (max + 1));
+    }
+
+    public int defend(int attackDamage) {
+        int defenseRoll = roll(this.defensePoints);
+        int damageTaken = Math.max(0, attackDamage - defenseRoll);
+        this.healthAmount -= damageTaken;
+        return damageTaken;
+    }
+
+    public void engageCombat(Unit defender) {
+        int attackRoll = this.roll(this.attackPoints);
+        int damageDealt = defender.defend(attackRoll);
+    }
+
+    public void visit(Warrior w){}
+    public void visit(Mage m){}
+    public void visit(Rogue r){}
+    public void visit(Hunter h){}
+
+    public void takeDamage(int incomingDamage) {
+        Random rnd = new Random();
+
+        int defenseRoll = rnd.nextInt(this.defensePoints + 1);
+
+        int actualDamage = incomingDamage - defenseRoll;
+
+        if (actualDamage > 0) {
+            this.healthAmount = this.healthAmount - actualDamage;
+
+            if (this.healthAmount < 0) {
+                this.healthAmount = 0;
+            }
+        }
+    }
+
+    public String description() {
+        return String.format("%s\t\tHealth: %s/%s\t\tAttack: %d\t\tDefense: %d",
+                getName(), getHealthAmount(), getHealthPool(), getAttackPoints(), getDefensePoints());
     }
 }

@@ -19,6 +19,15 @@ public class GameBoard {
     private List<Enemy> enemies;
     private Position exitPosition;
     private Player player;
+    private Position playerStartingPosition;
+
+    public Position getPlayerStartingPosition() {
+        return playerStartingPosition;
+    }
+
+    public void setPlayerStartingPosition(Position playerStartingPosition) {
+        this.playerStartingPosition = playerStartingPosition;
+    }
 
     public GameBoard(Cell[][] grid) {
         this.grid = grid;
@@ -46,9 +55,11 @@ public class GameBoard {
 
     public void addUnit(Unit unit) {
         this.units.add(unit);
-        if (unit instanceof Enemy) {
-            this.enemies.add((Enemy) unit);
-        }
+    }
+
+    public void addEnemy(Enemy enemy) {
+        this.enemies.add(enemy);
+        this.units.add(enemy);
     }
 
     public void setPlayer(Player player) {
@@ -100,15 +111,7 @@ public class GameBoard {
     }
 
     public List<Enemy> getEnemies(){
-        List<Enemy> enemies = new ArrayList<>();
-
-        for (Unit u: units){
-            if (u instanceof Enemy){
-                enemies.add((Enemy) u);
-            }
-        }
-
-        return enemies;
+        return this.enemies;
     }
 
     public boolean isLevelComplete() {
