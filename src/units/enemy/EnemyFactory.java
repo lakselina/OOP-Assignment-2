@@ -21,11 +21,11 @@ public class EnemyFactory {
             case 'w':
                 return new Monster(p, "White Walker", 'w',2000,2000,150,50,6,1000);
             case 'M':
-                return new Boss(p, "The Mountain",1000,1000,60,25,6,6,5);
+                return new Boss(p, "The Mountain",'M',1000,1000,60,25,6,6,5);
             case 'C':
-                return new Boss(p, "Queen Cersei",100,100,10,10,1,1,8);
+                return new Boss(p, "Queen Cersei",'C',100,100,10,10,1,1,8);
             case 'K':
-                return new Boss(p, "Night's King", 5000,5000,300,150,8,8,3);
+                return new Boss(p, "Night's King", 'K',5000,5000,300,150,8,8,3);
 
             case 'B':
                 return new Trap(p, "Bonus Trap", 'B', 1, 1, 1, 1,250,1,5);
