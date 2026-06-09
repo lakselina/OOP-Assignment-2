@@ -7,19 +7,19 @@ public class EnemyFactory {
     public static Enemy create(char type, Position p) {
         switch (type) {
             case 's':
-                return new Monster(p, "Gold Cloak", 80, 80, 8, 3, 3, 25);
+                return new Monster(p, "Gold Cloak", 's',80, 80, 8, 3, 3, 25);
             case 'k':
-                return new Monster(p, "Knight", 200, 200, 14, 8, 4, 50);
+                return new Monster(p, "Knight", 'k',200, 200, 14, 8, 4, 50);
             case 'q':
-                return new Monster(p, "Queen's Guard",400,400, 20,15,5,100);
+                return new Monster(p, "Queen's Guard",'q',400,400, 20,15,5,100);
             case 'z':
-                return new Monster(p, "Wright", 600,600,30,15,3,100);
+                return new Monster(p, "Wright", 'z',600,600,30,15,3,100);
             case 'b':
-                return new Monster(p, "Bear",1000,1000,75,30,4,250);
+                return new Monster(p, "Bear",'b',1000,1000,75,30,4,250);
             case 'g':
-                return new Monster(p, "Giant",1500,1500,100,40,5,500);
+                return new Monster(p, "Giant",'g',1500,1500,100,40,5,500);
             case 'w':
-                return new Monster(p, "White Walker", 2000,2000,150,50,6,1000);
+                return new Monster(p, "White Walker", 'w',2000,2000,150,50,6,1000);
             case 'M':
                 return new Boss(p, "The Mountain",1000,1000,60,25,6,6,5);
             case 'C':
