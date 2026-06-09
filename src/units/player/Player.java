@@ -51,6 +51,11 @@ public abstract class Player extends Unit {
         this.engageCombat(e);
 
         if (!e.isAlive()) {
+            this.experience += e.getExperienceValue();
+
+            while (this.experience >= 50 * this.getLevel()) {
+                this.levelUp();
+            }
         }
     }
 
