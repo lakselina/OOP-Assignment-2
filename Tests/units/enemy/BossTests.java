@@ -14,7 +14,7 @@ public class BossTests {
 
     @BeforeEach
     public void setUp() {
-        boss = new Boss(new Position(5, 5), "TestBoss", 200, 20, 10, 500, 5, 3,3);
+        boss = new Boss(new Position(5, 5), "TestBoss", 't',200, 20, 10, 500, 5, 3,3);
 
         dummyTarget = new Warrior(new Position(1, 1), "Target", 100, 100, 10, 5, 5);
     }

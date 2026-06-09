@@ -43,4 +43,8 @@ public class Trap extends Enemy {
             return ".";
         }
     }
+
+    public boolean isVisible() {
+        return visible;
+    }
 }

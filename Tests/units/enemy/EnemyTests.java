@@ -41,7 +41,7 @@ public class EnemyTests {
 
     private static class DummyEnemy extends Enemy {
         public DummyEnemy(Position position, String name, Integer healthPool, Integer attackPoints, Integer defensePoints, int experienceValue) {
-            super(position, name, 'r',healthPool, healthPool, attackPoints, defensePoints, experienceValue);
+            super(position, name, 'r', healthPool, healthPool, attackPoints, defensePoints, experienceValue);
         }
 
         public void onTick() {
