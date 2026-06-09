@@ -7,6 +7,7 @@ public abstract class Cell {
     protected Position position;
     protected Occupant occupant;
 
+
     public Cell(Position position){
         this.position = position;
         this.occupant = null;
@@ -25,4 +26,12 @@ public abstract class Cell {
     }
 
     public abstract void accept(CellVisitor visitor);
+
+    public Occupant getOccupant(){
+        return null;
+    }
+
+    public void setOccupant(Occupant occupant){
+
+    }
 }

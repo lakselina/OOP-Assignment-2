@@ -1,16 +1,16 @@
 package units.enemy;
+import game.GameBoard;
 import units.Unit;
 import units.player.Player;
 import utils.Position;
 import visitor.OccupantVisitor;
-import utils.Point;
 
 
 public abstract class Enemy extends Unit {
     protected int experienceValue;
 
 
-    public Enemy(Position position, String name, Integer healthPool, Integer healthAmount, Integer attackPoints, Integer defensePoints, Integer experienceValue) {
+    public Enemy(Position position, String name, int healthPool, int healthAmount, int attackPoints, int defensePoints, int experienceValue) {
         super(position, name, healthPool, healthAmount, attackPoints, defensePoints);
         this.experienceValue = experienceValue;
     }
@@ -23,6 +23,6 @@ public abstract class Enemy extends Unit {
         visitor.visit(this);
     }
 
-    public abstract void onEnemyTurn(Player player);
+    public abstract void onEnemyTurn(Player player, GameBoard board);
 }
 
