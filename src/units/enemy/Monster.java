@@ -54,6 +54,9 @@ public class Monster extends Enemy{
         targetCell.accept(this);
     }
 
+    public int getVisionRange(){
+        return visionRange;
+    }
 
 
 
