@@ -18,11 +18,13 @@ public class GameController {
     private int currentLevelIndex;
     private MessageCallback messageCallback;
 
-    public GameController(GameBoard board, Player player, MessageCallback callback) {
+    public GameController(GameBoard board, Player player, List<String> levelFiles, MessageCallback callback) {
         this.board = board;
         this.player = player;
+        this.levelFiles = levelFiles;
         this.scanner = new Scanner(System.in);
         this.messageCallback = callback;
+        this.currentLevelIndex = 0;
     }
 
 
@@ -53,9 +55,6 @@ public class GameController {
                 }
 
                 player.onTick();
-                for (Enemy e : board.getEnemies()) {
-                    e.onTick();
-                }
             }
 
             if (!player.isAlive()) {
@@ -72,7 +71,10 @@ public class GameController {
 
     private void loadLevel(String levelPath) {
         this.board = LevelParser.load(levelPath);
-        this.player.setPosition(board.getPlayerStartingPosition());
+        Position startPos = board.getPlayerStartingPosition();
+        this.player.setPosition(startPos);
+        this.board.setPlayer(this.player);
+        this.board.setOccupant(startPos, this.player);
     }
 
     private void handlePlayerTurn(String input) {
@@ -94,6 +96,8 @@ public class GameController {
             case "e":
                 player.castAbility(visitor);
                 break;
+            case "q":
+                break;
             default:
                 messageCallback.send("Invalid move!");
         }
@@ -108,7 +112,7 @@ public class GameController {
     private void handleEnemiesTurn() {
         for (Enemy enemy : board.getEnemies()) {
             if (enemy.isAlive()) {
-                enemy.processTurn(this.player, this.board);
+                enemy.onEnemyTurn(this.player, this.board);
             }
         }
     }

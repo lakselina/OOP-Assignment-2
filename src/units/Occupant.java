@@ -16,5 +16,6 @@ public abstract class Occupant {
     }
 
     public abstract void accept(OccupantVisitor visitor);
+    public void setPosition(Position p){this.position = p;}
 
 }

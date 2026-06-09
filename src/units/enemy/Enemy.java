@@ -10,8 +10,8 @@ public abstract class Enemy extends Unit {
     protected int experienceValue;
 
 
-    public Enemy(Position position, String name, int healthPool, int healthAmount, int attackPoints, int defensePoints, int experienceValue) {
-        super(position, name, healthPool, healthAmount, attackPoints, defensePoints);
+    public Enemy(Position position, String name, char tile, int healthPool, int healthAmount, int attackPoints, int defensePoints, int experienceValue) {
+        super(position, name, tile, healthPool, healthAmount, attackPoints, defensePoints);
         this.experienceValue = experienceValue;
     }
 

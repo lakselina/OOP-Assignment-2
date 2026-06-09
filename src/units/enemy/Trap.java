@@ -12,12 +12,11 @@ public class Trap extends Enemy {
     private char tile;
 
     public Trap(Position position, String name, char tile, int healthPool, int helathAmount, int attackPoints, int defensePoints, int experienceValue, int visibilityTime, int invisibilityTime){
-        super(position, name, healthPool, helathAmount, attackPoints, defensePoints, experienceValue);
+        super(position, name, tile, healthPool, helathAmount, attackPoints, defensePoints, experienceValue);
         this.visibilityTime = visibilityTime;
         this.invisibilityTime = invisibilityTime;
         this.ticksCount = 0;
         this.visible = true;
-        this.tile = tile;
     }
 
     public void onEnemyTurn(Player player, GameBoard board){
