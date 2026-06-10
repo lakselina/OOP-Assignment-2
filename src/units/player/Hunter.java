@@ -47,4 +47,10 @@ public class Hunter extends Player {
     public int getAbilityRange() {
         return range;
     }
+
+    @Override
+    public String description() {
+        return super.description() + String.format(" | Level: %d | Exp: %d | Arrows: %d | Range: %d",
+                getLevel(), getExperience(), getArrowsCount(), getAbilityRange());
+    }
 }

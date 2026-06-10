@@ -73,6 +73,13 @@ public class GameController {
 
     private void loadLevel(String levelPath) {
         this.board = LevelParser.load(levelPath);
+
+        this.player.setMessageCallback(this.messageCallback);
+
+        for (units.enemy.Enemy e : this.board.getEnemies()) {
+            e.setMessageCallback(this.messageCallback);
+        }
+
         Position startPos = board.getPlayerStartingPosition();
         this.player.setPosition(startPos);
         this.board.setPlayer(this.player);

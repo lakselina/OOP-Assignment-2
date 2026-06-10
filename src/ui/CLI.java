@@ -42,6 +42,7 @@ public class CLI {
             System.out.println("4. Mage - Thoros of Myr");
             System.out.println("5. Rogue - Arya Stark");
             System.out.println("6. Rogue - Bronn");
+            System.out.println("7. Hunter - Ygritte");
 
             String input = scanner.nextLine();
 

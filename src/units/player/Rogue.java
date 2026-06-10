@@ -37,4 +37,11 @@ public class Rogue extends Player{
     public int getCurrentEnergy() {
         return currEnergy;
     }
+
+    @Override
+    public String description() {
+        return super.description() + String.format(" | Level: %d | Exp: %d | Energy: %d/100",
+                getLevel(), getExperience(), getCurrentEnergy());
+    }
+
 }

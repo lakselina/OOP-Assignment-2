@@ -21,13 +21,15 @@ public abstract class Player extends Unit {
     public void levelUp() {
         experience -= 50 * playerLevel;
         playerLevel++;
-
         healthPool += 10 * playerLevel;
         healthAmount = healthPool;
         attackPoints += 4 * playerLevel;
         defensePoints += playerLevel;
-
         levelUpSpecifics();
+
+        if (msgCallback != null) {
+            msgCallback.send(this.getName() + " reached level " + playerLevel + ": +Health, +Attack, +Defense!");
+        }
     }
 
     protected abstract void levelUpSpecifics();
@@ -51,8 +53,10 @@ public abstract class Player extends Unit {
         this.engageCombat(e);
 
         if (!e.isAlive()) {
+            if (msgCallback != null) {
+                msgCallback.send(e.getName() + " died. " + this.getName() + " gained " + e.getExperienceValue() + " experience.");
+            }
             this.experience += e.getExperienceValue();
-
             while (this.experience >= 50 * this.getLevel()) {
                 this.levelUp();
             }

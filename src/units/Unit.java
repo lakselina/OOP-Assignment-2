@@ -9,6 +9,8 @@ import units.player.Warrior;
 import utils.Position;
 import visitor.CellVisitor;
 import visitor.OccupantVisitor;
+import ui.MessageCallback;
+import board.Floor;
 
 import java.util.Random;
 
@@ -20,6 +22,7 @@ public abstract class Unit extends Occupant implements CellVisitor, OccupantVisi
     protected int attackPoints;
     protected int defensePoints;
     protected char tile;
+    protected MessageCallback msgCallback;
 
     public Unit(Position position, String name, char tile, int healthPool, int healthAmount, int attackPoints, int defensePoints)
     {
@@ -66,6 +69,10 @@ public abstract class Unit extends Occupant implements CellVisitor, OccupantVisi
 
     }
 
+    public void setMessageCallback(MessageCallback msgCallback) {
+        this.msgCallback = msgCallback;
+    }
+
     public void visit(Floor floor){
         Occupant occupant = floor.getOccupant();
 
@@ -83,13 +90,31 @@ public abstract class Unit extends Occupant implements CellVisitor, OccupantVisi
 
     public int defend(int attackDamage) {
         int defenseRoll = roll(this.defensePoints);
+        if (msgCallback != null) {
+            msgCallback.send(this.getName() + " rolled " + defenseRoll + " defense points.");
+        }
+
         int damageTaken = Math.max(0, attackDamage - defenseRoll);
         this.healthAmount -= damageTaken;
+
+        if (msgCallback != null) {
+            msgCallback.send(this.getName() + " took " + damageTaken + " damage.");
+        }
         return damageTaken;
     }
 
     public void engageCombat(Unit defender) {
+        if (msgCallback != null) {
+            msgCallback.send(this.getName() + " engaged in combat with " + defender.getName() + ".");
+            msgCallback.send(this.description());
+            msgCallback.send(defender.description());
+        }
+
         int attackRoll = this.roll(this.attackPoints);
+        if (msgCallback != null) {
+            msgCallback.send(this.getName() + " rolled " + attackRoll + " attack points.");
+        }
+
         int damageDealt = defender.defend(attackRoll);
     }
 

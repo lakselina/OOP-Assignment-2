@@ -58,4 +58,10 @@ public class Mage extends Player {
     public int getManaPool() {
         return manaPool;
     }
+
+    @Override
+    public String description() {
+        return super.description() + String.format(" | Level: %d | Exp: %d | Mana: %d/%d | Spell Power: %d",
+                getLevel(), getExperience(), getCurrentMana(), getManaPool(), getSpellPower());
+    }
 }
