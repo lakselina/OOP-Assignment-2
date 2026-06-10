@@ -1,7 +1,7 @@
 package units.player;
 
-import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import utils.Position;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -12,7 +12,7 @@ public class MageTests {
 
     @BeforeEach
     public void setUp() {
-        mage = new Mage(new Position(0, 0), "TestMage", 100, 10, 5, 300, 30, 15, 5, 3,5);
+        mage = new Mage(new Position(0, 0), "TestMage", 100, 10, 5, 300, 30, 15, 5, 3, 5);
     }
 
     @Test
@@ -23,9 +23,7 @@ public class MageTests {
         mage.levelUp();
 
         assertEquals(initialManaPool + (25 * 2), mage.getManaPool(), "Mage should get specific mana pool bonus");
-
         assertEquals(initialSpellPower + (10 * 2), mage.getSpellPower(), "Mage should get specific spell power bonus");
-
         assertTrue(mage.getCurrentMana() > 0, "Current mana should increase upon leveling up");
     }
 
@@ -35,8 +33,20 @@ public class MageTests {
 
         mage.onTick();
 
-        assertEquals(String.valueOf(Math.min(mage.getManaPool(), currentManaBefore + mage.getLevel())),
-                mage.getCurrentMana(),
-                "Mage should regenerate mana based on its level every tick");
+        int expectedMana = Math.min(mage.getManaPool(), currentManaBefore + mage.getLevel());
+        assertEquals(expectedMana, mage.getCurrentMana(), "Mage should regenerate mana based on its level every tick");
+    }
+
+    @Test
+    public void testManaRegenerationDoesNotExceedPool() {
+        mage.levelUp();
+
+        int maxPool = mage.getManaPool();
+
+        for (int i = 0; i < maxPool; i++) {
+            mage.onTick();
+        }
+
+        assertEquals(mage.getManaPool(), mage.getCurrentMana(), "Current mana should never exceed the mana pool limit");
     }
 }

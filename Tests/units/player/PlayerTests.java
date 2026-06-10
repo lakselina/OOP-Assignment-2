@@ -15,7 +15,7 @@ public class PlayerTests {
     @BeforeEach
     void setUp() {
         player = new DummyPlayer(new Position(0, 0), "TestHero", 100, 20, 0);
-        dummyEnemy = new Monster(new Position(1, 0), "TestMonster", 50, 50, 10, 0, 100, 1);
+        dummyEnemy = new Monster(new Position(1, 0), "TestMonster", 'm',50, 50, 10, 0, 100, 1);
     }
 
     @Test
@@ -35,14 +35,14 @@ public class PlayerTests {
     }
 
     @Test
-    public void testExperienceGain() {
-        int initialExp = player.getExperience();
+    public void testExperienceGainAndLevelUp() {
+        int initialLevel = player.getLevel();
 
         dummyEnemy.defend(1000);
         player.visit(dummyEnemy);
 
-        assertTrue(player.getExperience() > initialExp, "Player must gain experience after visiting a dead enemy");
-        assertEquals(100, player.getExperience(), "Player should have exactly 100 experience");
+        assertEquals(initialLevel + 1, player.getLevel(), "Player must level up after gaining enough experience");
+        assertEquals(50, player.getExperience(), "Player should have 50 experience left after leveling up");
     }
 
     @Test

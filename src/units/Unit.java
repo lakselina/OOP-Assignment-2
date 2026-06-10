@@ -96,6 +96,9 @@ public abstract class Unit extends Occupant implements CellVisitor, OccupantVisi
 
         int damageTaken = Math.max(0, attackDamage - defenseRoll);
         this.healthAmount -= damageTaken;
+        if (healthAmount < 0){
+            this.healthAmount = 0;
+        }
 
         if (msgCallback != null) {
             msgCallback.send(this.getName() + " took " + damageTaken + " damage.");

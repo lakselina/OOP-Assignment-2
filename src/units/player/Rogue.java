@@ -19,7 +19,9 @@ public class Rogue extends Player{
     public void castAbility(OccupantVisitor visitor) {
         if (this.currEnergy >= this.cost) {
             this.currEnergy -= this.cost;
-            this.accept(visitor);
+            if (visitor != null) {
+                this.accept(visitor);
+            }
         }
     }
 

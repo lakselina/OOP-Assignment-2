@@ -12,7 +12,7 @@ public class RogueTests {
 
     @BeforeEach
     public void setUp() {
-        rogue = new Rogue(new Position(0, 0), "TestRogue", 100, 20, 5, 10, 5);
+        rogue = new Rogue(new Position(0, 0), "TestRogue", 100, 20, 5, 10, 50);
     }
 
     @Test
@@ -36,8 +36,10 @@ public class RogueTests {
 
         assertEquals(60, rogue.getCurrentEnergy(), "Rogue should regenerate exactly 10 energy every tick");
 
-        rogue.castAbility(null);
-        rogue.onTick();
+        for (int i = 0; i < 5; i++) {
+            rogue.onTick();
+        }
+
         assertEquals(100, rogue.getCurrentEnergy(), "Energy should not exceed the maximum capacity of 100");
     }
 }

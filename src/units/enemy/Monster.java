@@ -69,4 +69,7 @@ public class Monster extends Enemy{
         return visionRange;
     }
 
+    public char getTile() {
+        return tile;
+    }
 }

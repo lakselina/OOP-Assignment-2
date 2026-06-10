@@ -20,7 +20,9 @@ public class Warrior extends Player {
             remainingCooldown = abilityCooldown;
             healthAmount = Math.min(this.healthPool, this.healthAmount + (10 * this.defensePoints));
 
-            this.accept(visitor);
+            if (visitor != null) {
+                this.accept(visitor);
+            }
         }
     }
 
